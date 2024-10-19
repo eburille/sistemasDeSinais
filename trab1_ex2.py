@@ -5,13 +5,18 @@ def u(x):
     return np.heaviside(x, 1)
 
 def h(t):
-    return -2*u(t-1) + 2*u(t-2)
+    return np.exp(-2*(t+1)) * u(t+1)
 
 def x(t):
-    return u(t) - u(t-1)
+    return u(t) + (1-t)*u(t-1) + (t-2)*u(t-2)
 
-def respAnalitica(x):
-    return u(x-1)*(2-2*x) - u(x-2)*(2-2*x) + u(x-2)*(2*x-6) - u(x-3)*(2*x-6)
+def respAnalitica(t):
+    i2 = ( np.exp(-2*(t+1))/2* (np.exp(2*(t+1)) -1))    * u(t+1) * u(-t)
+
+    i3 = (np.exp(-2*(t+1)) * (1/2*(np.e**2-1) - 3/4*np.e**2) + 3/4 - t/2) * u(t) * u(-t+1)
+
+    i4 = (np.exp(-2*(t+1))* (1/2*(np.e**2 - 1) + (np.e**4/4-3/4*np.e**2))) * u(t-1) * u(-t+3)
+    return i2  + i3 + i4
 
 start = -9
 end = 9
