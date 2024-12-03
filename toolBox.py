@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def degrau(x):
+# função degrau
+def u(x):
     return np.heaviside(x, 1)
+
