@@ -8,10 +8,10 @@ def h(n):
     return ( 5.75*0.7**(n-5) - 5.25*0.9**(n-5) )*u(n-5)
 
 def x(n):
-    return u(n)
+    return 2*np.cos(np.pi/2*n)
 
 def respAnalitica(n):
-    caso1 = ( -13.42*0.7**(n-5) +  47.25*0.9**(n-5)  -  33.33)*u(n-5)
+    caso1 = 1.9256*np.cos(np.pi/2*n)
     caso2 = 0#  ( (-6.4)*(0.8)**n * (1-1.25**(n+1))  ) * u(n)*u(-n+4)
     caso3 = 0#  (13.13*0.8**n) * u(n-5) #*u(-n+5)
     caso4 = 0#  0 #1     * u(n-6)

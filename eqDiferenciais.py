@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from time import sleep
+
 from toolBox import u
 # Aplica o método de Euler para encontrar o próximo valor de um sistema baseado na derivada dos estados q
 ## start = Ponto de inicio do sistema
@@ -55,41 +55,32 @@ def y(q):
 
 # Resposta analítica do sistema 
 def yAnalitico(t):
-    return 0# 10/3*np.exp(-2*t) - 23/15*np.exp(-5*t) + 1/5   #np.exp(-2*t)*11/3  -  np.exp(-5*t)*5/3   +  2/3*(3/10 - (5*np.exp(-2*t) - 2*np.exp(-5*t))/10  )
+    return 0
 
 if __name__ == "__main__":
 
 
-    L = 1
-    R1 = 1
-    R2 = 1
-    C1 = 1
-    C2 = 1
-
-    DEN = C2*L*R1/R2*C1 + L*C1*C2
-    
-    e1 = -(1/R2) / DEN
-    e2 = -(C2 + C1*R1/R2 + C1)  / DEN
-    e3 = -(C2*L/R2 + C2*C1*R1) / DEN
-
+    k = 7.6545
+    b1 = 0.4899
+    b2 = 13.6842
+    m = 10.582
 
     # Condições iniciais
           #        y(0) dy(0)
-    y0 = np.array([0.0, 0.0, 0.0])
+    y0 = np.array([0.0, 0.0])
 
     start = 0
-    end = 20
+    end = 8
     h = 0.0001
 
-    A = np.array([[0.0, 1.0, 0.0],
-                  [0.0, 0.0, 1.0],
-                  [e1,  e2,  e3]])
+    A = np.array([[0.0, 1.0],
+                  [-2*k/m, -(b1+b2)/m]])
     
-    B = np.array([0.0, 0.0, 1.0/DEN])
+    B = np.array([0.0, b2/m])
     
-    B_ =  np.array([0.0, 0.0, 0.0])
+    B_ =  np.array([0.0, 0.0])
 
-    C = np.array([1, 0, 0])
+    C = np.array([1,0])
     D = np.array([0])
 
     t, q = metEuler(start, end, h, dq, y0)
@@ -104,4 +95,5 @@ if __name__ == "__main__":
 #    plt.grid()
 #    plt.xlabel("t")
 #    plt.ylabel("y(t)")
+    plt.grid()
     plt.show()

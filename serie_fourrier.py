@@ -5,7 +5,12 @@ import matplotlib.pyplot as plt
 def X(k):
     if k == 0:
         return 0
-    return 2/(k*np.pi**2)  * (1j*np.pi/(2) * np.cos(k*np.pi/2) - 1j/k * np.sin(k*np.pi/2))
+    if k == 1:
+        return 1/2j
+    elif k == -1:
+        return -1/2j
+    else:
+        return 0
 
 # reconstrói a função no tempo baseado na série de fourrier
 def x(t):
@@ -21,7 +26,7 @@ if __name__ == "__main__":
     numDeSenoides = 40
 
     # Frequência natural
-    W0 = 2
+    W0 = 4
 
     start = -2*3.1415
     end = 2*3.1415
